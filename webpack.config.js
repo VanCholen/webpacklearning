@@ -3,6 +3,9 @@ const path = require('path');
 // 导出插件
 const MiniCssPlugin = require('mini-css-extract-plugin');
 
+// 导入HtmlWebPackPlugin
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     entry: './src/main', //入口文件
     output: {
@@ -51,6 +54,13 @@ module.exports = {
         new MiniCssPlugin({
             // 输出的CSS文件名
             filename: 'css/[name].css',
+        }),
+
+        // 实例化HtmlWebPackPlugin
+        new HtmlWebPackPlugin({
+            chunks: ['main'],
+            filename: 'index.html', // 构建后的文件名
+            template: 'index.html' // 源文件名
         })
     ]
 };
