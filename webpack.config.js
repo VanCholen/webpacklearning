@@ -1,4 +1,8 @@
-const path = require('path')
+const path = require('path');
+
+// 导出插件
+const MiniCssPlugin = require('mini-css-extract-plugin');
+
 module.exports = {
     entry: './src/main', //入口文件
     output: {
@@ -19,7 +23,10 @@ module.exports = {
                 // 顺序从右往左依次使用css-loader、再使用style-loader
                 // css-loader完成CSS文件到JavaScript模块的转换
                 // style-loader将JavaScript模块中的样式内容通过DOM操作写入到HTML页面的style节点中
-                use: ['style-loader', 'css-loader']
+                //use: ['style-loader', 'css-loader']
+                
+                // 将style-loader替换为MiniCssPlugin提供的loader
+                use: [MiniCssPlugin.loader, 'css-loader']
             },
             {
                 // 以gif/png/jpg结尾的文件应用file-loader
@@ -37,5 +44,13 @@ module.exports = {
                 ]
             }
         ]
-    }
-}
+    },
+
+    plugins: [
+        // 实例化MiniCssPlugin
+        new MiniCssPlugin({
+            // 输出的CSS文件名
+            filename: 'css/[name].css',
+        })
+    ]
+};
