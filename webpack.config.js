@@ -41,12 +41,21 @@ module.exports = {
                             // 构建文件名和目录设置，[name]和[ext]是占位符
                             name: 'images/[name].[ext]',
                             esModule: false, //是否启用ES6模块系统
-                            publicPath: 'build', //输出的根目录
                         }
                     }
                 ]
             }
         ]
+    },
+
+    // 开发服务器配置
+    devServer: {
+        // URL的根目录
+        static: {
+            directory: path.join(__dirname, 'build'),
+          },
+        // DevServer的HTTP服务端口
+        port: 8080
     },
 
     plugins: [
